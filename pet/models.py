@@ -24,7 +24,10 @@ class Breed(models.Model):
         max_length=100
     )
 
+class Color(models.Model):
+    color_name=models.CharField(max_length=30)
 
+    
 class Pet(models.Model):
     GENDER_CHOISES=[
         ('F','femail'),
