@@ -27,7 +27,7 @@ class Breed(models.Model):
 class Color(models.Model):
     color_name=models.CharField(max_length=30)
 
-    
+
 class Pet(models.Model):
     GENDER_CHOISES=[
         ('F','femail'),
@@ -67,3 +67,9 @@ class Pet(models.Model):
         auto_now=True
     )
 
+class PetPicture(models.Model):
+    pet=models.ForeignKey(
+        Pet,
+        on_delete=models.CASCADE
+    )
+    pciture=models.ImageField()
