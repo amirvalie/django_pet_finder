@@ -3,12 +3,29 @@ from django.db import models
 # Create your models here.
 
 
+class PetLocation(models.Model):
+    person=models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+    )
+    state=models.CharField(
+        max_length=50,
+    )
+    city=models.CharField(
+        max_length=50,
+    )
+    address=models.TextField()
+    zip_code=models.CharField(
+        max_length=10,
+    )
+
+
 class Pet(models.Model):
     GENDER_CHOISES=[
         ('F','femail'),
         ('M','mail'),
     ]
-    PET_LOCATION=[
+    PET_TYPE=[
         ('cat','Cat'),
         ('dog','Dog'),
     ]
@@ -18,7 +35,7 @@ class Pet(models.Model):
         null=True,
     )
     animal_type=models.CharField(
-        choices=PET_LOCATION,
+        choices=PET_TYPE,
         max_length=3,
     )
     gender = models.CharField(
