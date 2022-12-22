@@ -19,6 +19,11 @@ class PetLocation(models.Model):
         max_length=10,
     )
 
+class Breed(models.Model):
+    breed_name=models.CharField(
+        max_length=100
+    )
+
 
 class Pet(models.Model):
     GENDER_CHOISES=[
