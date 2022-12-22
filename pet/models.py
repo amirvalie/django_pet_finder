@@ -81,3 +81,32 @@ class PetHealth(models.Model):
         Pet,
         on_delete=models.CASCADE
     )
+
+
+
+class PetPersonality(models.Model):
+    CHARACTERISTICS_TYPE=[
+        ('calm','calm'),
+        ('energetic','energetic'),
+    ]
+    is_warm_treated=models.BooleanField()
+    color=models.ForeignKey(
+        Color,
+        on_delete=models.PROTECT,
+    )
+    mood=models.CharField(
+        max_length=20,
+        choices=CHARACTERISTICS_TYPE,
+    )
+    pet=models.ForeignKey(
+        Pet,
+        on_delete=models.CASCADE,
+        related_name='personality'
+    )
+    good_treated_with_children=models.BooleanField(
+        default=False,
+    )
+    trained=models.BooleanField(
+        verbose_name='Is the animal trained?',
+    )
+    about= models.TextField()
