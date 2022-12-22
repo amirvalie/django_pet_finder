@@ -73,3 +73,11 @@ class PetPicture(models.Model):
         on_delete=models.CASCADE
     )
     pciture=models.ImageField()
+
+class PetHealth(models.Model):
+    title=models.CharField(max_length=250)
+    checked=models.BooleanField()
+    pet=models.ForeignKey(
+        Pet,
+        on_delete=models.CASCADE
+    )
