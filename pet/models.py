@@ -85,6 +85,11 @@ class PetHealth(models.Model):
 
 
 class PetPersonality(models.Model):
+    pet=models.ForeignKey(
+        Pet,
+        on_delete=models.CASCADE,
+        related_name='personality'
+    )
     CHARACTERISTICS_TYPE=[
         ('calm','calm'),
         ('energetic','energetic'),
@@ -98,11 +103,6 @@ class PetPersonality(models.Model):
         max_length=20,
         choices=CHARACTERISTICS_TYPE,
     )
-    pet=models.ForeignKey(
-        Pet,
-        on_delete=models.CASCADE,
-        related_name='personality'
-    )
     good_treated_with_children=models.BooleanField(
         default=False,
     )
@@ -110,3 +110,10 @@ class PetPersonality(models.Model):
         verbose_name='Is the animal trained?',
     )
     about= models.TextField()
+
+
+class AdditionalField(models.Model):
+    lable=models.CharField(max_length=250)
+    value=models.CharField(max_length=250)
+    pet_personality=models.ForeignKey(PetPersonality, on_delete=models.CASCADE)
+
