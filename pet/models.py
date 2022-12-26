@@ -113,7 +113,14 @@ class PetPersonality(models.Model):
 
 
 class AdditionalField(models.Model):
-    lable=models.CharField(max_length=250)
-    value=models.CharField(max_length=250)
-    pet_personality=models.ForeignKey(PetPersonality, on_delete=models.CASCADE)
+    lable=models.CharField(
+        max_length=250,
+    )
+    value=models.CharField(
+        max_length=250,
+    )
+    pet_personality=models.ForeignKey(
+        PetPersonality,
+        on_delete=models.CASCADE,
+    )
 
