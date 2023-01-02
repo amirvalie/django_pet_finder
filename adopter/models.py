@@ -1,5 +1,28 @@
 from django.db import models
 
+
+class AdapterProfile(models.Model):
+    user=models.OneToOneField(to, on_delete)
+    first_name=models.CharField(
+        max_length=30,
+    )
+    last_name=models.CharField(
+        max_length=30,
+    )
+    phone_number=models.CharField(
+        max_length=11,
+    )
+    state=models.CharField(
+        max_length=30,
+    )
+    city=models.CharField(
+        max_length=30,
+    )
+    zip_code=models.CharField(
+        max_length=10,
+    )
+    address=models.TextField()
+
 class AdapterInformation(models.Model):
     title=models.CharField(
         max_length=250
