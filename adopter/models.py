@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 User=get_user_model()
 
 class AdapterProfile(models.Model):
-    user=models.OneToOneField(User, on_delete)
+    user=models.OneToOneField(User, on_delete=models.CASCADE)
     first_name=models.CharField(
         max_length=30,
     )
@@ -44,8 +44,12 @@ class Input(models.Model):
         default='',
     )
     description = models.TextField(
-        max_length=1500,
-        default=''
+        blank=True,
+        null=True,
+    )
+    prompt_text = models.TextField(
+        blank=True,
+        null=True,
     )
     INPUT_TYPE_CHOICES = [
         ('MCSS' , 'Multiple Choice Single Select'),
@@ -59,11 +63,7 @@ class Input(models.Model):
         choices = INPUT_TYPE_CHOICES,
         default='MCSS',
     )
-    prompt_text = models.TextField(
-        max_length=800,
-        default='',
-    )
-    
+
     # def check_input_options(self,type_option,id):
     #     related_input=[
     #         self.mcss_input_options,
@@ -116,6 +116,8 @@ class UFInputOption(models.Model):
     )
     file = models.FileField(
         upload_to='uploads/',
+        blank=True,
+        null=True,
     )
 
 class NAInputOption(models.Model):
@@ -124,7 +126,10 @@ class NAInputOption(models.Model):
         on_delete=models.CASCADE,
         related_name='na_input_options'
     )
-    key = models.IntegerField()
+    key = models.IntegerField(        
+        blank=True,
+        null=True,
+    )
 
 class STVCInputOption(models.Model):
     input = models.ForeignKey(
@@ -132,8 +137,14 @@ class STVCInputOption(models.Model):
         on_delete=models.CASCADE,
         related_name='stvc_input_options'
     )
-    range_max = models.FloatField()
-    range_min = models.FloatField()    
+    range_max = models.FloatField(
+        blank=True,
+        null=True,
+    )
+    range_min = models.FloatField(
+        blank=True,
+        null=True,
+    )    
 
 
 
