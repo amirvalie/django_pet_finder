@@ -1,8 +1,9 @@
 from django.db import models
-
+from django.contrib.auth import get_user_model
+User=get_user_model()
 
 class AdapterProfile(models.Model):
-    user=models.OneToOneField(to, on_delete)
+    user=models.OneToOneField(User, on_delete)
     first_name=models.CharField(
         max_length=30,
     )
@@ -27,7 +28,7 @@ class AdapterInformation(models.Model):
     title=models.CharField(
         max_length=250
     )
-    description=models.TextFeild(
+    description=models.TextField(
         blank=True,
         null=True,
     )
@@ -87,7 +88,7 @@ class BaseMultipleChoise(models.Model):
         max_length=250,
     )
     checked=models.BooleanField(
-        default=false,
+        default=False,
     )
 
     class Meta:
@@ -107,7 +108,7 @@ class MCMSInputOption(models.Model):
         related_name='mcms_input_options'
     )
 
-class UFInputOption(AbstractInputOption):
+class UFInputOption(models.Model):
     input = models.ForeignKey(
         'Input',
         on_delete=models.CASCADE,
