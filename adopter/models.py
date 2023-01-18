@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 User=get_user_model()
 
-class AdapterProfile(models.Model):
+class AdopterProfile(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE)
     first_name=models.CharField(
         max_length=30,
@@ -24,7 +24,7 @@ class AdapterProfile(models.Model):
     )
     address=models.TextField()
 
-class AdapterInformation(models.Model):
+class AdopterInformation(models.Model):
     title=models.CharField(
         max_length=250
     )
@@ -34,10 +34,10 @@ class AdapterInformation(models.Model):
     )
 
 class Input(models.Model):
-    adapterinfo = models.OneToOneField(
-        AdapterInformation,
+    adapterinfo = models.ForeignKey(
+        AdopterInformation,
         on_delete=models.CASCADE,
-        null=True, related_name='input',
+        related_name='input',
     )
     title = models.CharField(
         max_length=150,
@@ -52,36 +52,18 @@ class Input(models.Model):
         null=True,
     )
     INPUT_TYPE_CHOICES = [
-        ('MCSS' , 'Multiple Choice Single Select'),
-        ('MCMS' , 'Multiple Choice Multi Select'),
-        ('STVC' , 'Simple Threshold Value Comparision'),
-        ('NA' , 'Numeric Answer'),
-        ('UF' , 'Upload File'),
+        ('mcss_input_options' , 'Multiple Choice Single Select'),
+        ('mcms_input_options' , 'Multiple Choice Multi Select'),
+        ('stvc_input_options' , 'Simple Threshold Value Comparision'),
+        ('na_input_options' , 'Numeric Answer'),
+        ('uf_input_options' , 'Upload File'),
     ]
     input_type = models.CharField(
-        max_length=12,
+        max_length=50,
         choices = INPUT_TYPE_CHOICES,
-        default='MCSS',
+        default='mcss_input_options',
     )
-
-    # def check_input_options(self,type_option,id):
-    #     related_input=[
-    #         self.mcss_input_options,
-    #         self.ipip_input_options,
-    #         self.mcms_input_options,
-    #         self.stvc_input_options,
-    #         self.cfda_input_options,
-    #     ]
-    #     input_type=['MCSS','IPIP','MCMS','STVC','CFDA' ,]
-    #     for iter_input_type in range(len(input_type)):
-    #         if type_option in input_type[iter_input_type]:
-    #             try:
-    #                 related_input[iter_input_type].get(id=int(id))
-    #                 return True
-    #             except:
-    #                 return False
-    #     else:
-    #         return "input_type_error"
+    active_input=models.BooleanField(default=True)
 
 class BaseMultipleChoise(models.Model):
     value=models.CharField(
