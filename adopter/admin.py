@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     # AdapterProfile,
-    AdapterInformation,
+    AdopterInformation,
     Input,
     MCSSInputOption,
     UFInputOption,
@@ -9,10 +9,32 @@ from .models import (
     STVCInputOption,
 )
 
-# admin.site.register(AdapterProfile)
-admin.site.register(AdapterInformation)
-admin.site.register(Input)
-admin.site.register(MCSSInputOption)
-admin.site.register(UFInputOption)
-admin.site.register(NAInputOption)
-admin.site.register(STVCInputOption)
+class MCSSInputModelAmdin(admin.TabularInline):
+    model=MCSSInputOption
+
+class UFInputAmdin(admin.TabularInline):
+    model=UFInputOption
+
+class NAInputModelAmdin(admin.TabularInline):
+    model=NAInputOption
+
+class STVCInputModelAmdin(admin.TabularInline):
+    model=STVCInputOption
+
+
+class InputModelAdmin(admin.ModelAdmin):
+    inlines=[
+        MCSSInputModelAmdin,
+        STVCInputModelAmdin,
+        NAInputModelAmdin,
+        UFInputAmdin,
+    ]
+    list_display=[
+        'title',
+        'description',
+        'prompt_text',
+        'input_type',
+    ]
+
+admin.site.register(AdopterInformation)
+admin.site.register(Input,InputModelAdmin)
