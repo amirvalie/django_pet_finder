@@ -1,0 +1,45 @@
+model
+
+ # def current_input_options(self):
+    #     for related_input in self._meta.related_objects:
+    #         if getattr(self,related_input.name).exists():
+    #             return related_input.name
+    #     else:
+    #         return
+
+    # def clean(self):
+    #     from django.core.exceptions import ValidationError
+    #     if self.pk:
+    #         if self.current_input_options() and \
+    #             self.input_type != self.current_input_options():
+    #             raise ValidationError({
+    #                 'input_type': (
+    #                     f'You can not change your input type input type \
+    #                     input option attached{self.current_input_options()}'
+    #                     ),
+    #                 })
+    
+   # @receiver(post_save,sender=Input)
+# def correction_input_type(sender, instance, created, **kwargs):
+#     if instance.current_input_options():
+#         if instance.input_type != instance.current_input_options():
+#             instance.input_type=instance.current_input_options()
+#             instance.save()   
+#     print(instance.current_input_options())
+
+admin
+    # def get_inline_instances(self, request, obj=None):
+   	from django.db.models.signals import post_save,pre_save
+	from django.dispatch import receiver
+    #     input_type={
+    #         'mcss_input_options':MCSSInputModelAmdin,
+    #         'stvc_input_options': STVCInputModelAmdin,
+    #         'na_input_options': NAInputModelAmdin,
+    #         'uf_input_options':UFInputAmdin,
+    #     }
+    #     for k,inline in input_type.items():
+    #         try:
+    #             if obj.input_type == k:
+    #                 return [inline(self.model,self.admin_site)]
+    #         except:
+    #             return [MCSSInputModelAmdin(self.model,self.admin_site)]
