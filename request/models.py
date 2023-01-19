@@ -10,7 +10,7 @@ class AdopterRequest(models.Model):
         on_delete=models.CASCADE
     )
     adopter_information=models.ManyToManyField(
-        Input
+        AdopterInformation,
     )
     pet=models.ForeignKey(
         Pet,
@@ -27,6 +27,11 @@ class AdopterRequestStatus(models.Model):
         ('accept','Accept'),
         ('reject','Reject'),
     ]
+    staus=models.CharField(
+        max_length=15,
+        choices=STATUS,
+        default='pending'
+    )
     title=models.CharField(
         max_length=250,
     )
