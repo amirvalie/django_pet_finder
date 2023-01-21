@@ -71,16 +71,20 @@ class Pet(models.Model):
 class PetPicture(models.Model):
     pet=models.ForeignKey(
         Pet,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='pet_picture'
     )
     pciture=models.ImageField()
 
 class PetHealth(models.Model):
-    title=models.CharField(max_length=250)
+    title=models.CharField(
+        max_length=250,
+    )
     checked=models.BooleanField()
     pet=models.ForeignKey(
         Pet,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='pet_health',
     )
 
 
@@ -123,5 +127,6 @@ class AdditionalField(models.Model):
     pet_personality=models.ForeignKey(
         PetPersonality,
         on_delete=models.CASCADE,
+        related_name='additional_field',
     )
 
