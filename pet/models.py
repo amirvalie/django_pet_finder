@@ -28,24 +28,45 @@ class Breed(models.Model):
 class Color(models.Model):
     color_name=models.CharField(max_length=30)
 
+class Category(models.Model):
+    parent=models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
+        related_name='children',
+    )
+    slug=models.SlugField(
+        max_length=100,
+        unique=True,
+    )
+    title=models.CharField(
+        max_length=200,
+    )
+    thumbnail=models.ImageField(
+        upload_to='category',
+        null=True,
+        blank=True,
+    )
+    is_public=models.BooleanField(
+        default=False
+    )
+
 
 class Pet(models.Model):
     GENDER_CHOISES=[
         ('F','femail'),
         ('M','mail'),
     ]
-    PET_TYPE=[
-        ('cat','Cat'),
-        ('dog','Dog'),
-    ]
+    category=models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE
+    )
     name = models.CharField(
         max_length=20,
         blank=True,
         null=True,
-    )
-    animal_type=models.CharField(
-        choices=PET_TYPE,
-        max_length=3,
     )
     gender = models.CharField(
         max_length=1,
@@ -59,6 +80,9 @@ class Pet(models.Model):
     location=models.ForeignKey(
         PetLocation,
         on_delete=models.PROTECT
+    )
+    is_public=models.BooleanField(
+        default=False
     )
     about=models.TextField()
     created=models.DateTimeField(

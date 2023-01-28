@@ -10,6 +10,7 @@ from .serializers import (
     AdditionalFieldSerializer,
     ColorSerializer,
     PetLocationSerializer,
+    CategorySerializer,
 )
 from .models import (
     Pet,
@@ -20,6 +21,7 @@ from .models import (
     Color,
     Breed,
     AdditionalField,
+    Category,
 )
 from .permissions import IsSuperUserOrAuthorOrReadOnly
 from rest_framework.response import Response
@@ -69,9 +71,8 @@ class PetLocationViewSet(viewsets.ModelViewSet):
     queryset=PetLocation.objects.all()
     serializer_class=PetLocationSerializer
 
-class PetLoc(APIView):
-    def get(self,request):
-        print('user:',request.user)
-        print('auth:',request.auth)
-        return Response({'massage':'ok'})
 
+class CategoryViewSet(viewsets.ModelViewSet):
+    permission_classes=[IsSuperUserOrAuthorOrReadOnly]
+    queryset=Category.objects.all()
+    serializer_class=CategorySerializer

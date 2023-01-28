@@ -9,6 +9,7 @@ from .models import (
     Breed,
     PetLocation,
     AdditionalField,
+    Category,
 )
 class PetSerializer(serializers.HyperlinkedModelSerializer):
     breed=serializers.HyperlinkedRelatedField(view_name='breed-detail',read_only=True)
@@ -68,4 +69,9 @@ class AdditionalFieldSerializer(serializers.ModelSerializer):
 class ColorSerializer(serializers.ModelSerializer):
     class Meta:
         model=Color
+        fields='__all__'
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Category
         fields='__all__'

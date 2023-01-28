@@ -11,7 +11,7 @@ from .views import (
         BreedViewSet,
         AdditionalFieldViewSet,
         PetLocationViewSet,
-        PetLoc,
+        CategoryViewSet,
     )
 
 router = DefaultRouter()
@@ -25,11 +25,10 @@ router.register('color',ColorViewSet)
 router.register('breed',BreedViewSet)
 router.register('add_field',AdditionalFieldViewSet)
 router.register('pet_location',PetLocationViewSet)
-
+router.register('category',CategoryViewSet)
 
 urlpatterns = [
     path('', include((router.urls))),
-    path('pet_loc/', PetLoc.as_view()),
 ]
 
 
