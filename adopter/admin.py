@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (
-    # AdapterProfile,
+    AdopterProfile,
     AdopterInformation,
     Input,
     MCSSInputOption,
@@ -38,3 +38,4 @@ class InputModelAdmin(admin.ModelAdmin):
 
 admin.site.register(AdopterInformation)
 admin.site.register(Input,InputModelAdmin)
+admin.site.register(AdopterProfile)
