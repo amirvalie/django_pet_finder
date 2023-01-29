@@ -4,20 +4,19 @@ from .models import(
     Article,
 )
 # Register your models here.
-# class CategoryAdmin(admin.ModelAdmin):
-# 	list_display = ('title','slug','status')
-# 	list_filter = (['status'])
-# 	search_fields = ('title', 'slug')
-# 	prepopulated_fields = {'slug': ('title',)}
+class CategoryAdmin(admin.ModelAdmin):
+	list_display = ('title','slug')
+	search_fields = ('title', 'slug')
+	prepopulated_fields = {'slug': ('title',)}
 
 
-# class ArticleAdmin(admin.ModelAdmin):
-# 	list_display = ('title','slug', 'author','status')
-# 	list_filter = ('publish','status', 'author')
-# 	search_fields = ('title', 'description')
-# 	prepopulated_fields = {'slug': ('title',)}
-# 	ordering = ['-status', '-publish']
+class ArticleAdmin(admin.ModelAdmin):
+	list_display = ('title','slug', 'author','status')
+	list_filter = ('publish','status', 'author')
+	search_fields = ('title', 'description')
+	prepopulated_fields = {'slug': ('title',)}
+	ordering = ['-status', '-publish']
 
 
-# admin.site.register(Article, ArticleAdmin)
-# admin.site.register(BlogCategory, CategoryAdmin)
+admin.site.register(Article, ArticleAdmin)
+admin.site.register(BlogCategory, CategoryAdmin)
