@@ -28,15 +28,7 @@ class Breed(models.Model):
 class Color(models.Model):
     color_name=models.CharField(max_length=30)
 
-class Category(models.Model):
-    parent=models.ForeignKey(
-        'self',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        default=None,
-        related_name='children',
-    )
+class CategoryABC(models.Model):
     slug=models.SlugField(
         max_length=100,
         unique=True,
@@ -44,13 +36,20 @@ class Category(models.Model):
     title=models.CharField(
         max_length=200,
     )
-    thumbnail=models.ImageField(
-        upload_to='category',
-        null=True,
-        blank=True,
-    )
     is_public=models.BooleanField(
         default=False
+    )
+    class Meta:
+        abstract=True
+
+class PetCategory(CategoryABC):
+    parent=models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
+        related_name='children',
     )
 
 
@@ -60,7 +59,7 @@ class Pet(models.Model):
         ('M','mail'),
     ]
     category=models.ForeignKey(
-        Category,
+        PetCategory,
         on_delete=models.CASCADE
     )
     name = models.CharField(

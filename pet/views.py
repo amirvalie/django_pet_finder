@@ -21,7 +21,7 @@ from .models import (
     Color,
     Breed,
     AdditionalField,
-    Category,
+    PetCategory,
 )
 from .permissions import IsSuperUserOrAuthorOrReadOnly
 from rest_framework.response import Response
@@ -74,5 +74,5 @@ class PetLocationViewSet(viewsets.ModelViewSet):
 
 class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes=[IsSuperUserOrAuthorOrReadOnly]
-    queryset=Category.objects.all()
+    queryset=PetCategory.objects.all()
     serializer_class=CategorySerializer
