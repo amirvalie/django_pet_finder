@@ -22,4 +22,5 @@ urlpatterns = [
     path('pet/',include('pet.urls')),
     path('adopter/',include('adopter.urls')),
     path('request/',include('request.urls')),
+    path('blog/',include('blog.urls')),
 ]
