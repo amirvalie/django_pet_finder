@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'adopter',
     'pet',
     'request',
+    'blog',
 ]
 
 MIDDLEWARE = [
