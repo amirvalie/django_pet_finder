@@ -13,7 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
 	list_display = ('title','slug', 'author','status')
 	list_filter = ('publish','status', 'author')
-	search_fields = ('title', 'description')
+	search_fields = ('title',)
 	prepopulated_fields = {'slug': ('title',)}
 	ordering = ['-status', '-publish']
 
