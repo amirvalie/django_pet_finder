@@ -32,7 +32,6 @@ class InputModelAdmin(admin.ModelAdmin):
     list_display=[
         'title',
         'description',
-        'prompt_text',
         'input_type',
     ]
 
