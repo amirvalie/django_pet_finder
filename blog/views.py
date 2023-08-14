@@ -15,7 +15,7 @@ from pet.permissions import IsSuperUserOrAuthorOrReadOnly
 
 class ArticleViewSet(viewsets.ModelViewSet):
     permission_classes=[IsSuperUserOrAuthorOrReadOnly]
-    queryset=Article.objects.all()
+    queryset=Article.objects.publish()
     serializer_class=ArticleSerializer
 
 class BlogCategoryViewSet(viewsets.ModelViewSet):
