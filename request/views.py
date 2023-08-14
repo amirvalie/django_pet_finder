@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from pet.permissions import IsSuperUserOrAuthorOrReadOnly
 from .serializers import (
     AdopterRequestSerializer,
     AdopterRequestStatusSerializer,
@@ -8,7 +9,6 @@ from .models import (
     AdopterRequest,
     AdopterRequestStatus,
 )
-from pet.permissions import IsSuperUserOrAuthorOrReadOnly
 # Create your views here.
 
 
